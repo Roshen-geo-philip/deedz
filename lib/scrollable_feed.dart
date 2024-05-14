@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'dart:io'; // Import the dart:io package
 
 class ScrollableFeed extends StatelessWidget {
   final List<Map<String, dynamic>> campaigns;
 
-  const ScrollableFeed({super.key, required this.campaigns});
+  const ScrollableFeed({Key? key, required this.campaigns}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: campaigns.length,
       itemBuilder: (BuildContext context, int index) {
+        final campaign = campaigns[index];
+        final providerName = campaign['user'] ?? 'Unknown Provider'; // Provide a default value if null
         return CampaignTile(
-          providerName: campaigns[index]['user'],
-          imageUrl: campaigns[index]['image'],
-          description: campaigns[index]['description'],
-          timePosted: 'Just now', // You can change this to actual time
+          providerName: providerName,
+          imageUrl: campaign['image'],
+          description: campaign['description'],
+          timePosted: campaign['timePosted'],
         );
       },
     );
@@ -24,17 +26,17 @@ class ScrollableFeed extends StatelessWidget {
 
 class CampaignTile extends StatelessWidget {
   final String providerName;
-  final File imageUrl;
+  final String imageUrl;
   final String description;
   final String timePosted;
 
   const CampaignTile({
-    super.key,
+    Key? key,
     required this.providerName,
     required this.imageUrl,
     required this.description,
     required this.timePosted,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,9 @@ class CampaignTile extends StatelessWidget {
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8.0),
-          Image.file(imageUrl),
+          imageUrl.startsWith('http')
+              ? Image.network(imageUrl)
+              : Image.file(File(imageUrl)),
           const SizedBox(height: 8.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
