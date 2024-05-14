@@ -1,7 +1,32 @@
 import 'package:flutter/material.dart';
-import 'scrollable_feed.dart';
+import 'scrollable_feed.dart'; // Assuming you have already implemented ScrollableFeed widget
+import 'create_campaign_page.dart';
+import 'explore_campaign_page.dart';
+import 'wallet_page.dart';
+import 'profile_page.dart';
 
-class CampaignDiscoveryPage extends StatelessWidget {
+class CampaignDiscoveryPage extends StatefulWidget {
+  @override
+  _CampaignDiscoveryPageState createState() => _CampaignDiscoveryPageState();
+}
+
+class _CampaignDiscoveryPageState extends State<CampaignDiscoveryPage> {
+  int _selectedIndex = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[
+    ScrollableFeed(),
+    ExploreCampaignPage(),
+    CreateCampaignPage(),
+    WalletPage(),
+    ProfilePage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +46,15 @@ class CampaignDiscoveryPage extends StatelessWidget {
         ],
       ),
       backgroundColor: Colors.black,
-      body: ScrollableFeed(),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
