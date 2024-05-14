@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class ScrollableFeed extends StatelessWidget {
-  const ScrollableFeed({super.key});
+  final List<Map<String, dynamic>> campaigns;
+
+  const ScrollableFeed({super.key, required this.campaigns});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 20,
+      itemCount: campaigns.length,
       itemBuilder: (BuildContext context, int index) {
         return CampaignTile(
-          providerName: 'Provider $index',
-          imageUrl: 'https://via.placeholder.com/300',
-          description: 'This is a description for campaign $index.',
-          timePosted: '2 hours ago',
+          providerName: campaigns[index]['user'],
+          imageUrl: campaigns[index]['image'],
+          description: campaigns[index]['description'],
+          timePosted: 'Just now', // You can change this to actual time
         );
       },
     );
@@ -21,7 +24,7 @@ class ScrollableFeed extends StatelessWidget {
 
 class CampaignTile extends StatelessWidget {
   final String providerName;
-  final String imageUrl;
+  final File imageUrl;
   final String description;
   final String timePosted;
 
@@ -50,7 +53,7 @@ class CampaignTile extends StatelessWidget {
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8.0),
-          Image.network(imageUrl),
+          Image.file(imageUrl),
           const SizedBox(height: 8.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

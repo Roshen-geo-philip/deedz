@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'scrollable_feed.dart'; // Assuming you have already implemented ScrollableFeed widget
+import 'scrollable_feed.dart';
 import 'create_campaign_page.dart';
-import 'explore_campaign_page.dart';
-import 'wallet_page.dart';
-import 'profile_page.dart';
 
 class CampaignDiscoveryPage extends StatefulWidget {
   @override
@@ -12,13 +9,14 @@ class CampaignDiscoveryPage extends StatefulWidget {
 
 class _CampaignDiscoveryPageState extends State<CampaignDiscoveryPage> {
   int _selectedIndex = 0;
+  List<Map<String, dynamic>> _campaigns = [];
 
   static List<Widget> _widgetOptions = <Widget>[
-    ScrollableFeed(),
-    ExploreCampaignPage(),
-    CreateCampaignPage(),
-    WalletPage(),
-    ProfilePage(),
+    ScrollableFeed(campaigns: []),
+    const Text('Explore Campaigns'), // Placeholder for Explore Campaign page
+    Placeholder(), // Placeholder for Create Campaign page
+    const Text('Wallet'), // Placeholder for Wallet page
+    const Text('Profile'), // Placeholder for Profile page
   ];
 
   void _onItemTapped(int index) {
@@ -27,18 +25,24 @@ class _CampaignDiscoveryPageState extends State<CampaignDiscoveryPage> {
     });
   }
 
+  void _onCampaignCreated(Map<String, dynamic> newCampaign) {
+    setState(() {
+      _campaigns.add(newCampaign);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'DeeDz',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications, color: Colors.white),
+            icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
               // Handle campaign updates
             },
@@ -47,7 +51,11 @@ class _CampaignDiscoveryPageState extends State<CampaignDiscoveryPage> {
       ),
       backgroundColor: Colors.black,
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _selectedIndex == 0
+            ? ScrollableFeed(campaigns: _campaigns)
+            : _selectedIndex == 2
+                ? CreateCampaignPage(onCampaignCreated: _onCampaignCreated)
+                : _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
