@@ -8,10 +8,9 @@ class CampaignDiscoveryPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'DeeDz',
-          style:
-              TextStyle(color: Colors.white), // Set app bar text color to white
+          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.black, // Set app bar background color to black
+        backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.notifications, color: Colors.white),
@@ -21,13 +20,12 @@ class CampaignDiscoveryPage extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: Colors.black, // Set background color to black
+      backgroundColor: Colors.black,
       body: ScrollableFeed(),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor:
-            Colors.black, // Change bottom navigation bar color to black
-        selectedItemColor: Colors.white, // Set selected item color to white
-        unselectedItemColor: Colors.grey, // Set unselected item color to grey
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),

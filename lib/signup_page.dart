@@ -1,37 +1,25 @@
+// TODO Implement this library.
 import 'package:flutter/material.dart';
-import 'campaign_discovery_page.dart';
-import 'signup_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
+class SignupPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
-  void _login() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => CampaignDiscoveryPage()),
-    );
-  }
-
-  void _goToSignup() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SignupPage()),
-    );
+  void _signup() {
+    // Implement sign-up logic
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+        title: const Text('Signup', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
@@ -81,59 +69,34 @@ class _LoginPageState extends State<LoginPage> {
                 style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    // Navigate to Forgot Password Page
-                  },
-                  child: const Text('Forgot Password?', style: TextStyle(color: Colors.white)),
+              TextField(
+                controller: _confirmPasswordController,
+                decoration: InputDecoration(
+                  labelText: 'Confirm Password',
+                  labelStyle: const TextStyle(color: Colors.white),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[800],
                 ),
+                obscureText: true,
+                style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: _login,
+                onPressed: _signup,
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                child: const Text('Continue'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle Google sign-in
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-                child: const Text('Continue with Google'),
-              ),
-              const SizedBox(height: 16),
-              Center(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Don't have an account?",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    TextButton(
-                      onPressed: _goToSignup,
-                      child: const Text(
-                        'Signup',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                child: const Text('Signup'),
               ),
             ],
           ),
