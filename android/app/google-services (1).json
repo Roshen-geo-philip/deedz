@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "366326053007",
+    "project_id": "deedz-eec37",
+    "storage_bucket": "deedz-eec37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366326053007:android:0cc34f86a840acfd7fd8fa",
+        "android_client_info": {
+          "package_name": "com.example.deedz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiBGEYjVixX9snmghCclTysEUcRIwSGGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
